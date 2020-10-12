@@ -42,18 +42,25 @@ inline void log_impl(T&& val, Ts... vals) {
     log_impl<endch>(vals...);
 }
 
-// using #define, or I need to define 6 function
-#define logs ::Kenton::log_impl<' '>  // log space
-#define logln ::Kenton::log_impl<'\n'> // log line
 
+template<typename... Ts>
+inline void logs(Ts... vals) {
+    log_impl<' '>(vals...);
+}
+template<typename... Ts>
+inline void logln(Ts... vals) {
+    log_impl<'\n'>(vals...);
+}
 #else
 
 template<typename... Ts>
-inline void logging_nothing(Ts... vals) {
+inline void logs(Ts... vals) {
     // Do nothing
 }
-#define logs logging_nothing // log space
-#define logln logging_nothing // log line
+template<typename... Ts>
+inline void logln(Ts... vals) {
+    // Do nothing
+}
 
 #endif // DEBUG
 
