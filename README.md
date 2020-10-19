@@ -20,23 +20,22 @@ Delaying indefinitely.
   - codes without proper comments and variable naming
   - usually have smaller size, so it is called "min"
   - usually are the raw code I write for some project
-- [algo](algo): algorithm code collection.
-- [buggy](buggy): It can run, but it cannot run.
-  - [range.h](buggy\range.h):
-- [fun](fun): written but never used, just for fun.
-  - [mk_pair_t.h](fun\mk_pair_t.h): make a pair type
-- [incomplete](incomplete):cannot even compile or is not fully functional.
-  - [class BigInt](incomplete\bigint): just a big integer class
-- [util](util): possibly useful tools.
-  - [generate_menu.py](util\generate_menu.py): generate menu for this README.md.
-  - [lines_to_array.py](util\lines_to_array.py): convert lines of string to array of string.
-  - [logging.h](util\logging.h): simple logging functions.
+- [algo](./algo): algorithm code collection.
+- [buggy](./buggy): It can run, but it cannot run.
+  - [range.h](./buggy/range.h):
+- [fun](./fun): written but never used, just for fun.
+  - [mk_pair_t.h](./fun/mk_pair_t.h): make a pair type
+- [incomplete](./incomplete): cannot even compile or is not fully functional.
+  - [class BigInt](./incomplete/bigint): just a big integer class
+- [util](./util): possibly useful tools.
+  - [generate_menu.py](./util/generate_menu.py): generate menu for this README.md.
+  - [lines_to_array.py](./util/lines_to_array.py): convert lines of string to array of string.
+  - [logging.h](./util/logging.h): simple logging functions.
 
 ## History
 ### 2020 Oct. 20
 - Added:
-  - util
-    - generate_menu.py
+  - util/generate_menu.py
 
 ### 2020 Oct. 13
 - Set project directory structure.

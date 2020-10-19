@@ -24,7 +24,7 @@ def generate_menu(fileName, parentDir, level = 0):
     if ignore(fileName):
         return
 
-    fullPath = os.path.join(parentDir, fileName)
+    fullPath = parentDir+ '/' + fileName
 
     print('  '*level + '- [' + fileName + '](' + fullPath + '): ')
     
@@ -37,7 +37,7 @@ if __name__ == "__main__":
     for filePath in os.listdir(os.getcwd()):
         if not os.path.isdir(filePath):
             continue
-        generate_menu(filePath, '')
+        generate_menu(filePath, '.')
 
     
 
