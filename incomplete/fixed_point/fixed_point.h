@@ -99,11 +99,11 @@ const __FixedPoint<T, U, deciSz, dataSz>
     __FixedPoint<T, U, deciSz, dataSz>::EPS(0, 1);
 
 template <int deciSize>
-using FixedPoint32 = __FixedPoint<int, long long, deciSize, 31>;
+using FixedPoint32 = __FixedPoint<int, long long, deciSize>;
 
 #ifdef __GNUC__
 template <int deciSize>
-using FixedPoint64 = __FixedPoint<long long, __int128, deciSize, 31>;
+using FixedPoint64 = __FixedPoint<long long, __int128, deciSize>;
 #endif  // __GNUC__
 
 }  // namespace Kenton
