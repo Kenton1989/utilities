@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 
 namespace Kenton {
@@ -32,39 +33,50 @@ class __FixedPoint {
         return (long double)value / DEVISOR;
     }
 
+    const DType getRaw() const { return value; }
+    static __FixedPoint fromRaw(DType rawVal) {
+        __FixedPoint a;
+        a.value = rawVal;
+        return a;
+    }
+
     __FixedPoint& operator=(const __FixedPoint& a) { value = a.value; }
 
-    friend __FixedPoint operator+(const __FixedPoint& a,
-                                  const __FixedPoint& b) {
-        return __FixedPoint(a.value + b.value, true);
-    }
-    friend __FixedPoint operator-(const __FixedPoint& a,
-                                  const __FixedPoint& b) {
-        return __FixedPoint(a.value - b.value, true);
-    }
-    friend __FixedPoint operator*(const __FixedPoint& a,
-                                  const __FixedPoint& b) {
-        return __FixedPoint((UpType)a.value * b.value >> DECI_SZ, true);
-    }
-    friend __FixedPoint operator/(const __FixedPoint& a,
-                                  const __FixedPoint& b) {
-        return __FixedPoint(((UpType)a.value << DECI_SZ) / b.value, true);
-    }
+    __FixedPoint operator-() const { return __FixedPoint::fromRaw(-value); }
 
     __FixedPoint& operator+=(const __FixedPoint& a) { value += a.value; }
     __FixedPoint& operator-=(const __FixedPoint& a) { value -= a.value; }
     __FixedPoint& operator*=(const __FixedPoint& a) { *this = *this * a; }
     __FixedPoint& operator/=(const __FixedPoint& a) { *this = *this / a; }
 
+    friend __FixedPoint operator+(const __FixedPoint& a,
+                                  const __FixedPoint& b) {
+        return __FixedPoint::fromRaw(a.getRaw() + b.getRaw());
+    }
+    friend __FixedPoint operator-(const __FixedPoint& a,
+                                  const __FixedPoint& b) {
+        return __FixedPoint::fromRaw(a.getRaw() - b.getRaw());
+    }
+    friend __FixedPoint operator*(const __FixedPoint& a,
+                                  const __FixedPoint& b) {
+        return __FixedPoint::fromRaw((UpType)a.getRaw() * b.getRaw() >>
+                                     DECI_SZ);
+    }
+    friend __FixedPoint operator/(const __FixedPoint& a,
+                                  const __FixedPoint& b) {
+        return __FixedPoint::fromRaw(((UpType)a.getRaw() << DECI_SZ) /
+                                     b.getRaw());
+    }
+
     friend bool operator==(const __FixedPoint& a, const __FixedPoint& b) {
-        return a.value == b.value;
+        return a.getRaw() == b.getRaw();
     }
     friend bool operator!=(const __FixedPoint& a, const __FixedPoint& b) {
-        return !(a.value == b.value);
+        return !(a == b);
     }
 
     friend bool operator<(const __FixedPoint& a, const __FixedPoint& b) {
-        return a.value < b.value;
+        return a.getRaw() < b.getRaw();
     }
     friend bool operator>(const __FixedPoint& a, const __FixedPoint& b) {
         return b < a;
@@ -80,8 +92,11 @@ class __FixedPoint {
         return os << (long double)a;
     }
 
+    friend __FixedPoint abs(const __FixedPoint& a) {
+        return __FixedPoint(abs(a.getRaw()));
+    }
+
    private:
-    __FixedPoint(DType rawVal, bool) : value(rawVal) {}
     DType value;
 };
 
