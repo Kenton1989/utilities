@@ -44,11 +44,11 @@ class __FixedPoint {
     }
     friend __FixedPoint operator*(const __FixedPoint& a,
                                   const __FixedPoint& b) {
-        return __FixedPoint((UpType)a.value * b.value / DEVISOR, true);
+        return __FixedPoint((UpType)a.value * b.value >> DECI_SZ, true);
     }
     friend __FixedPoint operator/(const __FixedPoint& a,
                                   const __FixedPoint& b) {
-        return __FixedPoint((UpType)a.value * DEVISOR / b.value, true);
+        return __FixedPoint(((UpType)a.value << DECI_SZ) / b.value, true);
     }
 
     __FixedPoint& operator+=(const __FixedPoint& a) { value += a.value; }
