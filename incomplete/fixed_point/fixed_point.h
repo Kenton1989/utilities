@@ -40,14 +40,27 @@ class __FixedPoint {
         return a;
     }
 
-    __FixedPoint& operator=(const __FixedPoint& a) { value = a.value; }
+    __FixedPoint& operator=(const __FixedPoint& a) {
+        value = a.value;
+        return this*;
+    }
 
     __FixedPoint operator-() const { return __FixedPoint::fromRaw(-value); }
 
-    __FixedPoint& operator+=(const __FixedPoint& a) { value += a.value; }
-    __FixedPoint& operator-=(const __FixedPoint& a) { value -= a.value; }
-    __FixedPoint& operator*=(const __FixedPoint& a) { *this = *this * a; }
-    __FixedPoint& operator/=(const __FixedPoint& a) { *this = *this / a; }
+    __FixedPoint& operator+=(const __FixedPoint& a) {
+        value += a.value;
+        return this*;
+    }
+    __FixedPoint& operator-=(const __FixedPoint& a) {
+        value -= a.value;
+        return this*;
+    }
+    __FixedPoint& operator*=(const __FixedPoint& a) {
+        return *this = *this * a;
+    }
+    __FixedPoint& operator/=(const __FixedPoint& a) {
+        return *this = *this / a;
+    }
 
     friend __FixedPoint operator+(const __FixedPoint& a,
                                   const __FixedPoint& b) {
